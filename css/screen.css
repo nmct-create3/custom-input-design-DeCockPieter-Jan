@@ -47,6 +47,7 @@
     /* Shadows */
     --shadow-color: #20223a15;
     --inset-shadow: inset 0 1px 1px var(--shadow-color);
+    --focus-shadow: 0 0 1px 3px rgba(215, 227, 247, 4.00);
 
     /* border radius */
     --radius: 3px;
@@ -702,11 +703,106 @@ input::placeholder {
 */
 
 .c-option-list {
-
+    margin-bottom: 24px;
 }
 
 .c-option-list__item {
+    margin-bottom: 12px;
+}
 
+/*
+    Component: Custom toggle
+*/
+
+.c-toggle__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.c-toggle__input {
+    height: 24px;
+    width: 48px;
+    background-color: var(--color-neutral-xxx-light);
+    border-radius: 12px;
+    display: block;
+    position: relative;
+    border: 1px solid var(--color-neutral-xxx-light);
+}
+
+.c-toggle__checkbox-hidden:checked + .c-toggle__label .c-toggle__input::after {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+}
+
+.c-toggle__checkbox-hidden:checked + .c-toggle__label .c-toggle__input {
+    border: 1px solid var(--color-alpha-dark);
+    background-color: var(--color-alpha-dark);
+}
+
+.c-toggle__checkbox-hidden:focus + .c-toggle__label .c-toggle__input {
+    box-shadow: var(--focus-shadow);
+}
+
+.c-toggle__input::after {
+    content: "";
+    height: 22px;
+    width: 22px;
+    background-color: white;
+    border-radius: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-alpha);
+}
+
+
+
+.c-toggle__input--alternative {
+    height: 20px;
+    border: none;
+}
+
+.c-toggle__input--alternative::after {
+    top: -1px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+.c-toggle__checkbox-hidden:checked + .c-toggle__label .c-toggle__input--alternative {
+    border: none;
+    background-color: var(--color-alpha-xx-light);
+}
+
+.c-toggle__checkbox-hidden:checked + .c-toggle__label .c-toggle__input--alternative::after {
+    background-color: var(--color-alpha);
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.c-toggle__checkbox-hidden:focus + .c-toggle__label .c-toggle__input--alternative {
+    box-shadow: none;
+}
+
+.c-toggle__checkbox-hidden:focus + .c-toggle__label .c-toggle__input--alternative::after {
+    box-shadow: var(--focus-shadow);
+}
+
+
+/*
+    Component: Custom toggle list
+*/
+
+.c-toggle-list__item {
+    margin-bottom: 8px;
+}
+
+.c-toggle-list__item:not(:last-child) {
+    border-bottom: 1px solid var(--color-neutral-xxx-light)
 }
 
 /*
@@ -715,22 +811,94 @@ input::placeholder {
     Custom checkboxes & radio buttons
 */
 
+.c-custom-input-option {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-neutral-xxx-light);
+    margin-right: 8px;
+    box-shadow: var(--inset-shadow);
+    justify-content: center;
+    align-items: center;
+}
+
+.c-custom-input-option:hover {
+    border-color: var(--color-neutral-xx-light);
+}
+
+.c-custom-input-option-hidden {
+    display: none;
+
+}
+
+.c-custom-input-option-label {
+    display: flex;
+
+}
+
+.c-custom-input-option__symbol {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.c-custom-input-option--checkbox .c-custom-input-option__symbol{
+    height: 10px;
+    width: 10px;
+    fill: var(--color-alpha);
+}
+
+.c-custom-input-option--radio .c-custom-input-option__symbol {
+    height: 6px;
+    width: 6px;
+    background-color: var(--color-alpha);
+    border-radius: 100%;
+}
+
+.c-custom-input-option--checkbox {
+    border-radius: 3px;
+}
+
+.c-custom-input-option--radio {
+    border-radius: 100%;
+}
+
 /* Hide the actual input with the class .o-hide-accessible */
 
 /* checked state */
 
 .c-custom-input-option-hidden:checked + .c-custom-input-option-label {
-    /*
-        Do magic stuff here, for example:
-        background-color: red;
-    */
+    opacity: 1;
+
 }
 
 .c-custom-input-option-hidden:checked + .c-custom-input-option-label .c-custom-input-option__symbol {
-    /*
-        Do magic stuff here, for example:
-        fill: blue;
-    */
+    opacity: 1;
+}
+
+
+.c-custom-select {
+  display: block;
+  position: relative;
+}
+
+.c-custom-select:hover, .c-custom-select__input:hover {
+  cursor: pointer;
+}
+
+.c-custom-select__symbol {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-neutral-x-light);
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.c-custom-select__symbol {
+  pointer-events: none;
 }
 
 /*------------------------------------*\
